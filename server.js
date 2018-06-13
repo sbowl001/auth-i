@@ -1,5 +1,5 @@
 const express = require('express');
-const mongoose = require('mongooose');
+const mongoose = require('mongoose');
 const helmet = require('helmet');
 const routes = require('./User/userRoute');
 
@@ -26,5 +26,6 @@ server.get('/', (req, res) => {
 const port = 5000;
 
 server.listen(port, ()=> {
-    console.log('Server up and running on ${port}')
+        console.log(`Server up and running on ${port}`)
+        
 })

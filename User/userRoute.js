@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const User = require('./userModel');
 
+//cors for data meant for browser, like react app, if it has a diff api it allows it to go through
+
 router.route("/register")
     .post((req, res) => {
         const user = new User(req.body)

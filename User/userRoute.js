@@ -1,8 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const User = require('./userModel');
-
+const session = require('express-session');
 //cors for data meant for browser, like react app, if it has a diff api it allows it to go through
+
+const checkAuthorization = (req, res, next) => {
+    const {session} = req;
+    if(session.isLoggedIn) {
+        return next()
+    } else {
+        res.status(401).json({msg: 'You shall not pass'})
+    }
+}
 
 router.route("/register")
     .post((req, res) => {
@@ -34,8 +43,9 @@ router.route("/login")
         })
         .catch( err => res.status(500).json(err))
     })
+
 router.route("/users")
-    .get((req, res) => {
+    .get(checkAuthorization, (req, res) => {
         User.find()
         .then(users => {
             res.status(200).json(users);
@@ -45,6 +55,6 @@ router.route("/users")
         })
     })
 
-
+// Use this endpoint to verify that the password is hashed before it is saved. How?
 
 module.exports = router;

@@ -19,6 +19,13 @@ server.use(helmet());
 server.use(session({secret: 'super secret pwd', name:"lambdacookie"}));
 server.use('/api', routes);
 
+ 
+// server.get('/api/restricted', checkAuthorization, (req, res) => {
+//     res.status(200).json({msg: "you are authorized"})
+// })
+
+ 
+
 
 server.get('/', (req, res) => {
     res.send('Api is running')

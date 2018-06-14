@@ -16,6 +16,24 @@ router.route("/register")
         })
     })
 router.route("/login")
+    .put((req, res) => {
+        if(!req.body.username || !req.body.password) {
+            res.sendStatus(400)
+        }
+        const {username, password} = req.body;
+    User.findOne({username})
+        .then( user => {
+            user.comparePasswords( password, isMatch => {
+                if(isMatch){
+                    req.session.isLoggedIn = true;
+                    res.status(200).json({msg: "Logged In"})
+                } else {
+                    res.status(401).json({msg: "You shall not pass!"})
+                }
+            })
+        })
+        .catch( err => res.status(500).json(err))
+    })
 router.route("/users")
     .get((req, res) => {
         User.find()

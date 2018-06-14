@@ -23,4 +23,14 @@ UserSchema.pre('save', function(next){
     })
 })
 
+UserSchema.methods.comparePasswords = function(plaintextPass, cb){
+    bcrypt.compare(plaintextPass, this.password)
+    .then( isMatch => {
+        cb(isMatch)
+    })
+    .catch(err=> {
+        console.log(err)
+    })
+}
+
 module.exports = mongoose.model('User', UserSchema, 'users');

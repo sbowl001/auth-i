@@ -16,7 +16,7 @@ mongoose.connect('mongodb://localhost/usersdb')
 
 server.use(express.json());
 server.use(helmet());
-server.use(session({secret: 'super secret pwd', name:"lambdacookie"}));
+server.use(session({secret: 'super secret pwd', name:"lambdacookie", resave: false, saveUninitialized: false}));
 server.use('/api', routes);
 
  

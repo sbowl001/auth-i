@@ -58,7 +58,7 @@ router.route("/users")
 // Use this endpoint to verify that the password is hashed before it is saved. How?
 
 
-router.route("/restricted")
+router.route("/restricted/*")
     .get(checkAuthorization, (req, res) => {
     res.status(200).json({msg: "you are authorized"})
 })

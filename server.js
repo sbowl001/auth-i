@@ -2,7 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const routes = require('./User/userRoute');
-const session = require('express-session');
+// const session = require('express-session');
+const jwt = require('jsonwebtoken');
 
 const server = express();
 
@@ -16,7 +17,7 @@ mongoose.connect('mongodb://localhost/usersdb')
 
 server.use(express.json());
 server.use(helmet());
-server.use(session({secret: 'super secret pwd', name:"lambdacookie", resave: false, saveUninitialized: false}));
+// server.use(session({secret: 'super secret pwd', name:"lambdacookie", resave: false, saveUninitialized: false}));
 server.use('/api', routes);
 
  
